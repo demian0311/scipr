@@ -10,11 +10,10 @@ class ConfigParserTest {
         val xml = 
             <config>
             <server port="8099">
-                <location path="/static">
-                 <staticFileServer>
-                     <root>/Users/demian/code/demian0311.github.com/_site</root>
-                 </staticFileServer>
-                </location>
+                <location 
+                    path="/static" 
+                    type="static" 
+                    root="/Users/demian/code/demian0311.github.com/_site"/>
             </server>
             </config>
         
@@ -22,7 +21,6 @@ class ConfigParserTest {
         val result = unit.parse(xml)
         
         println("result: " + result)
-        
     }
 
 }
