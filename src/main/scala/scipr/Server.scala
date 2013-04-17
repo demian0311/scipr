@@ -1,0 +1,5 @@
+package scipr
+
+trait Server {
+
+}

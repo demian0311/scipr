@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+   <port="8099">
+      <path="/static">
+         <staticFileServer>
+            <root>/Users/demian/code/demian0311.github.com/_site</root>
+         </staticFileServer>
+      </path>
+   </port>
+</config>
+

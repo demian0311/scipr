@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+   <port="80">
+      <path="/app">
+         <proxy>
+            <origins>
+               <origin>http://127.0.0.1:8080</origin>
+               <origin>http://127.0.0.1:8080</origin>
+               <origin>http://127.0.0.1:8080</origin>
+               <origin>http://127.0.0.1:8080</origin>
+            </origins>
+            <timeouts>
+               <connect>500</connect>
+               <client>50000</connect>
+               <server>50000</server>
+            </timeouts>
+         </proxy>
+      </path>
+      <path="/static">
+         <staticFileServer>
+            <root>/home/demian/static_files</root>
+            <indexes>
+               <index>index.html</index>
+               <index>index.htm</index>
+            </indexes>
+         </staticFileServer>
+         <caching>
+            
+         </caching>
+      </path>
+   </port>
+</config>
