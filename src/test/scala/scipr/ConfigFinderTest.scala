@@ -9,4 +9,4 @@ class ConfigFinderTest {
         val result = unit.xmlFromFilename("src/test/resources/scipr-config.xml")
         println("result: " + result)
     }
-}
+} 
