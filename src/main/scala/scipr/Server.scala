@@ -15,9 +15,10 @@ class StaticServer extends Server {
 //  }
 //  val server = Http.serve(":8080", service)
 //  Await.ready(server)
+        println("starting")
     }
     
     def stop(){
-        
+        println("stopping")
     }
 }
