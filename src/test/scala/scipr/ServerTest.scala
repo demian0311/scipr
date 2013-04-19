@@ -25,7 +25,7 @@ class ServerTest {
             case Left(FailureResponse(NotFound, message)) => {
                 assertEquals("could not find file: missing.html", message)
             }
-            case _                                        => fail("should have returned a None")
+            case _ => fail("should have returned a None")
         }
     }
 }

@@ -28,20 +28,26 @@ class StaticServer(
     val path: String,
     val root: String) extends Server {
     def start() {
-        println("starting")
-
         val service = new Service[HttpRequest, HttpResponse] {
             def apply(req: HttpRequest): Future[HttpResponse] = {
-
+                //val channelBuffer = getFileContentsAsChannelBuffer(filename)
+                println("uri: " + req.getUri())
+               
+//                val result = getFileContentsAsChannelBuffer(req.getUri())
+//                result match {
+//                    
+//                }
+                
                 val response = new DefaultHttpResponse(
                     req.getProtocolVersion, HttpResponseStatus.OK)
                 //response.setContent()
+                //response.setContent(content)
 
                 Future.value(response)
                 // this is where we look at the file system and send 
                 // what we find from there
             }
-        }
+        } 
         val server = Http.serve(":" + port, service)
         Await.ready(server)
 
