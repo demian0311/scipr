@@ -38,6 +38,7 @@ class ConfigParser {
             case "static" => {
                 val newStaticServer = new StaticServer(
                         name=name.text, 
+                        port=port.text,
                         path=path.text, 
                         root=root.text)
                 Some(newStaticServer)
