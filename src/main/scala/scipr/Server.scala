@@ -4,6 +4,18 @@ import com.twitter.finagle.{ Http, Service }
 import com.twitter.util.{ Await, Future }
 import java.net.InetSocketAddress
 import org.jboss.netty.handler.codec.http._
+import org.jboss.netty.buffer.ChannelBuffer
+import org.jboss.netty.buffer.ChannelBufferInputStream
+import java.io.BufferedReader
+import org.jboss.netty.buffer.ChannelBuffers
+import java.nio.charset.Charset
+import java.io.FileNotFoundException
+import com.twitter.finagle.http.Status._
+
+import com.twitter.finagle.http.Status
+import org.jboss.netty.handler.codec.http.HttpResponseStatus
+
+case class FailureResponse(status: HttpResponseStatus, message: String)
 
 trait Server {
     def start()
@@ -19,24 +31,36 @@ class StaticServer(
         println("starting")
 
         val service = new Service[HttpRequest, HttpResponse] {
-            def apply(req: HttpRequest): Future[HttpResponse] =
-                Future.value(new DefaultHttpResponse(
-                    req.getProtocolVersion, HttpResponseStatus.OK))
-            // this is where we look at the file system and send 
-            // what we find from there
+            def apply(req: HttpRequest): Future[HttpResponse] = {
+
+                val response = new DefaultHttpResponse(
+                    req.getProtocolVersion, HttpResponseStatus.OK)
+                //response.setContent()
+
+                Future.value(response)
+                // this is where we look at the file system and send 
+                // what we find from there
+            }
         }
         val server = Http.serve(":" + port, service)
         Await.ready(server)
 
     }
 
-    def getFileContents(filename: String): Option[String] = {
-        val source = scala.io.Source.fromFile("file.txt")
-        val lines = source.mkString
-        //source.close ()
-
-        Some(lines)
-
+    def getFileContentsAsChannelBuffer(filename: String): Either[FailureResponse, ChannelBuffer] = {
+        try {
+            val bufferedSource = scala.io.Source.fromFile(root + "/" + filename)
+            val charArray = bufferedSource.toArray
+            val channelBuffer = ChannelBuffers.copiedBuffer(charArray, Charset.forName("UTF-8"))
+            Right(channelBuffer)
+        } catch {
+            case fnfe: FileNotFoundException => {
+                Left(FailureResponse(NotFound, "could not find file: " + filename))
+            }
+            case e => {
+                Left(FailureResponse(InternalServerError, e.getMessage()))
+            }
+        }
     }
 
     def stop() {
