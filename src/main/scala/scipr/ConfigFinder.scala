@@ -5,7 +5,7 @@ import scala.io._
 import scala.xml.XML
 
 object ConfigFinder{
-    def apply() { 
+    def apply(): ConfigFinder = { 
         new ConfigFinder()
     }
 }

@@ -4,7 +4,7 @@ import scala.xml.Elem
 import scala.xml.Node
 
 object ConfigParser {
-    def apply(){
+    def apply(): ConfigParser = {
         new ConfigParser()
     }
 }

@@ -24,6 +24,10 @@ trait Server {
 
 /** 
  * This works at a very basic level but much to do.
+ * 
+ * I think the servers know how to parse their own XML.  
+ * Possibly this is an alternate constructor or apply 
+ * method in an object.
  */
 class StaticServer(
     val name: String,

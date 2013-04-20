@@ -10,22 +10,15 @@ package scipr
  */
 object Scipr extends App {
     val configFilename = args(0)
-    val configFinder = new ConfigFinder()
-    
-    configFinder.xmlFromFilename(configFilename) match {
+    ConfigFinder().xmlFromFilename(configFilename) match {
         case Some(xml) => {
-            val configParser = new ConfigParser()
-            configParser.parse(xml) match {
-                case Some(servers) => {
-                    servers.foreach{_.start}
-                }
-                case None => {
-                    println("there were no servers to start in configuration file: " + configFilename)
-                }
+            ConfigParser().parse(xml) match {
+                case Some(servers) => servers.foreach { _.start }
+                case None => println("no servers in config file: " + configFilename)
             }
         }
         case None => {
-            println("unable to parse configuration file: " + configFilename)
+            println("unable to parse config file: " + configFilename)
         }
     }
 }
