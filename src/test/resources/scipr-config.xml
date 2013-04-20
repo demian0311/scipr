@@ -7,4 +7,14 @@
          type="static" 
          root="src/test/resources"/>
 </server>
+<!--server port="8098">
+    <location
+        name="wiki proxy"
+        path="/wiki"
+        type="proxy">
+        <origins>
+            <origin>127.0.0.1:4567</origin>
+        </origins>
+    </location>
+</server-->
 </config>

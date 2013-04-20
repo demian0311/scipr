@@ -1,17 +1,31 @@
 package scipr
 
+/**
+ * We need a higher level concept here.  Right now I have a server
+ * bound to a port.  This probably isn't correct.  With the way
+ * I have it now you can't have multiple servers running under the
+ * same port.  For example you couldn't have /static serving up
+ * static resources and then /app proxying calls to another server
+ * all of that behind the same port.
+ */
 object Scipr extends App {
-    val configFinder = new ConfigFinder()
-    println("args: " + args)
-    
     val configFilename = args(0)
-    println("configFilename: " + configFilename)
+    val configFinder = new ConfigFinder()
     
-    val xml = configFinder.xmlFromFilename(configFilename)
-    
-    val configParser = new ConfigParser()
-    val result = configParser.parse(xml.get) // TODO-DLN: badness
-    
-    println("starting servers")
-    result.get.first.start
+    configFinder.xmlFromFilename(configFilename) match {
+        case Some(xml) => {
+            val configParser = new ConfigParser()
+            configParser.parse(xml) match {
+                case Some(servers) => {
+                    servers.foreach{_.start}
+                }
+                case None => {
+                    println("there were no servers to start in configuration file: " + configFilename)
+                }
+            }
+        }
+        case None => {
+            println("unable to parse configuration file: " + configFilename)
+        }
+    }
 }

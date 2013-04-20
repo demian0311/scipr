@@ -22,6 +22,9 @@ trait Server {
     def stop()
 }
 
+/** 
+ * This works at a very basic level but much to do.
+ */
 class StaticServer(
     val name: String,
     val port: String,
