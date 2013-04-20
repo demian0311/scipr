@@ -7,8 +7,7 @@ import com.twitter.finagle.http.Status._
 
 class ServerTest {
 
-    val unit = new StaticServer("", "1", "",
-        "src/test/resources")
+    val unit = new StaticServer("", "1", "", "src/test/resources")
 
     @Test def getFileContentsAsChannelBuffer() {
         unit.getFileContentsAsChannelBuffer("index.html") match {

@@ -10,6 +10,9 @@ object Scipr extends App {
     val xml = configFinder.xmlFromFilename(configFilename)
     
     val configParser = new ConfigParser()
-    val servers = configParser.parse(xml.get) // TODO-DLN: badness
+    val result = configParser.parse(xml.get) // TODO-DLN: badness
+    
+    println("starting servers")
+    result.get.first.start
     
 }
