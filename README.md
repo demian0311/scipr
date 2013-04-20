@@ -2,8 +2,7 @@
 
 ## Description
 HTTP Server and Proxy in Scala.  Right now it'll just serve static files.
-This is just me learning Finagle, I think it's a great library and playing
-with some HTTP concepts in Scala.
+This is just me learning Finagle and playing with some HTTP concepts in Scala.
 
 ## Getting Started
 - Start it up from sbt by running `sbt run-scipr`.
