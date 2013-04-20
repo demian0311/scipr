@@ -13,7 +13,7 @@ class ServerTest {
         unit.getFileContentsAsChannelBuffer("/index.html") match {
             case Right(value) => {
                 val asString = value.toString(Charset.forName("UTF-8")).stripLineEnd
-                assertEquals("<html><h1>ohai</h2></html>", asString)
+                assertEquals("<html><h1>ohai</h2><img src=\"headshot.png\"/></html>", asString)
             }
             case Left(failureResponse) => fail(failureResponse.message)
         }

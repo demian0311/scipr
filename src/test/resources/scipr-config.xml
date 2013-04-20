@@ -5,6 +5,6 @@
          name="static resources"
          path="/static" 
          type="static" 
-         root="/Users/demian/code/demian0311.github.com/_site"/>
+         root="src/test/resources"/>
 </server>
 </config>

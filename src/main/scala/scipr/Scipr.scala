@@ -14,5 +14,4 @@ object Scipr extends App {
     
     println("starting servers")
     result.get.first.start
-    
 }
