@@ -37,6 +37,9 @@ class StaticServer(
                         val response = new DefaultHttpResponse(
                             req.getProtocolVersion, HttpResponseStatus.OK)
                         response.setContent(channelBuffer)
+                        if (req.getUri().endsWith("png")) {
+                            response.setHeader("Content-Type", "image/png")
+                        }
                         println(timer.stopString())
                         Future.value(response)
                     }
@@ -56,11 +59,28 @@ class StaticServer(
     }
 
     def getFileContentsAsChannelBuffer(filename: String): Either[FailureResponse, ChannelBuffer] = {
+        import java.io.File
+        import java.io.FileInputStream
+
         try {
-            val bufferedSource = scala.io.Source.fromFile(root + filename)
-            val charArray = bufferedSource.toArray
-            val channelBuffer = ChannelBuffers.copiedBuffer(charArray, Charset.forName("UTF-8"))
-            Right(channelBuffer)
+            if (filename.endsWith("png")) {
+                val file = new File(root + filename)
+                val in = new FileInputStream(file)
+                val bytes = new Array[Byte](file.length.toInt)
+                in.read(bytes)
+                in.close()
+                
+                println("bytes: " + bytes)
+
+                val cb = ChannelBuffers.copiedBuffer(bytes)
+                Right(cb)
+
+            } else {
+                val bufferedSource = scala.io.Source.fromFile(root + filename)
+                val charArray = bufferedSource.toArray
+                val channelBuffer = ChannelBuffers.copiedBuffer(charArray, Charset.forName("UTF-8"))
+                Right(channelBuffer)
+            }
         } catch {
             case fnfe: FileNotFoundException => {
                 Left(FailureResponse(NotFound, "could not find file: " + filename))
