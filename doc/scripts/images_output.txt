@@ -1,0 +1,62 @@
+*****************************************************
+this is how nginx does it
+
+*****************************************************
+* About to connect() to neidetcher.com port 80 (#0)
+*   Trying 184.106.150.226...
+* connected
+* Connected to neidetcher.com (184.106.150.226) port 80 (#0)
+> GET /assets/icons/flickr.png HTTP/1.1
+> User-Agent: curl/7.24.0 (x86_64-apple-darwin12.0) libcurl/7.24.0 OpenSSL/0.9.8r zlib/1.2.5
+> Host: neidetcher.com
+> Accept: */*
+>
+< HTTP/1.1 200 OK
+< Server: nginx/0.7.67
+< Date: Sat, 20 Apr 2013 02:10:55 GMT
+< Content-Type: image/png
+< Content-Length: 880
+< Last-Modified: Sun, 10 Mar 2013 22:07:03 GMT
+< Connection: keep-alive
+< Accept-Ranges: bytes
+<
+�PNG
+
+IHDR szz�tEXtSoftwareAdobe ImageReadyq�e<IDATx��WKk"A�6�ނ��A�xPa!�嚜�.��/��\r\�d�GA�AoIЄ=$�_��af�Fz���l܂F�鯾��kjJE�4���'�������������`��h��N���*^�w����M���#�^��d2�+4��3��|_��`P[59r"7yyy�Ӵ,܌�$H�E 7�Ή��}J����2�rܣ�������:ފgN�evn%Č��8Q���
+                                                                                                                 ��;�ߪ���g�ؼI���j�c���~3C:��X,�@noo��lB�R�V�eM$��*��mq ;;;
+��ڂ��+�������-���:Wp��ې�f��� u����B�Ft���r9����
+                 "T�a8�t:�T*e�D7��L&A�~bڝ��#��j===A4�j�xܐF��1���"�7`�d��]�"��	���?�n�+��O�~mg777�����>��c0t�F�!-^��Ņ���_Æ�cP*��J�(��2����-'8���~�����=��
+                                 B��iE�����7�
+                                              Z���.&�ߌ����%sH�&X__�N�Ú6���3a����`�
+* Connection #0 to host neidetcher.com left intact
+*�YPư�9̀�y˒#7���o��K�����*F~�2䦋|��F{{d��.����*m�S������&��{��ȅ���W��:��IEND�B`�* Closing connection #0
+
+*****************************************************
+this is how scipr does it
+
+*****************************************************
+* About to connect() to localhost port 8099 (#0)
+*   Trying ::1...
+* Connection refused
+*   Trying 127.0.0.1...
+* connected
+* Connected to localhost (127.0.0.1) port 8099 (#0)
+> GET /assets/icons/flickr.png HTTP/1.1
+> User-Agent: curl/7.24.0 (x86_64-apple-darwin12.0) libcurl/7.24.0 OpenSSL/0.9.8r zlib/1.2.5
+> Host: localhost:8099
+> Accept: */*
+>
+< HTTP/1.1 200 OK
+* no chunk, no close, no size. Assume close to signal end
+<
+âPNG
+
+IHDR szzÙtEXtSoftwareAdobe ImageReadyq…e<IDATx⁄ƒWKk"AÆ6¬ﬁÇΩÎAΩxPa!πÂöúÙ.˜‰/ÏÅ\r\ˆd≈GAÃAoI–Ñ=$Å_âÊafªFz∆ß«l‹ÇF«ÈØæØ™kjJE”4ÿﬂﬂ'èèèøûüü”ÔÔÔ˙õü`ä¢h™™N÷÷÷*^Øw˜‰‰‰MŸ€€#Ω^Ôœd2˘+4è«3˘|_’¡`P[59r"7yyyâ”¥,‹å«$HÁáE 7°ŒâƒŸ}Jêõ»à2ØÑr‹£ã‡˜ÎﬂÕ˘Ω:ﬁägNÙevn%ƒåÂÖÛ8Q≠–¿ñ
+          πË;øﬂ™∞Õ¬gêÿºI•Ëüj´c‰ÒÅ~3C:ùÜX,Å@noo°ŸlB•RÅV´eM$‚™’*¥€mq ;;;
+ÿ⁄⁄Ç´´+∏ªªõ‚Ú˘º-Ó˙˙p€€€êÕf‚ä≈‚¨ uÆÕÕÕBüFtÑëÁr9°¥çç
+                   "T⁄a8¬t:ÖT*eÈD7ºüL&Aœ~b⁄ù‡Ù#¿≈j===A4ïjÒx‹êFºñ1¨çπ"‰7`ödÃ≠]Ù"ˇò	˙˙ï?èn∑+ãäO£~mg777Ï®Ò»˚˝>å«c0tãF£!-^¿≈≈ÖÓ¸¸_√ÜûcP*ïòJª( Â2ã‰ııï-'8≥π¸~ˇÅ…˝˝=–—
+                                             B°–iEË‰ËÍı∫°ê7ç
+                                                             Z‚éœ.&ÄﬂåœÍÂÂ%sH«&X__áNß√ö6ì≥≥3aÑà√˛`∆
+* Closing connection #0
+*¢YP∆∞ø9ÕÄ›yÀí#7°£“o⁄ÉKÃÙ˛Å‹*F~¬2‰¶ã|ß¯F{{dï‰.ó´Ö‹*mïS∑€£Î˝±„§&ñ¯{˛Ü»Öú»˝WÄ˛:ÒôûÃµåIENDÆB`Ç
+*****************************************************

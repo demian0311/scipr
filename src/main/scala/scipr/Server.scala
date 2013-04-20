@@ -39,7 +39,9 @@ class StaticServer(
                         response.setContent(channelBuffer)
                         if (req.getUri().endsWith("png")) {
                             response.setHeader("Content-Type", "image/png")
+                            response.setHeader("Content-Length", channelBuffer.array().length)
                         }
+                        response.setHeader("Server", "scipr/0.1")
                         println(timer.stopString())
                         Future.value(response)
                     }
@@ -47,6 +49,7 @@ class StaticServer(
                         val response = new DefaultHttpResponse(
                             req.getProtocolVersion, failureResponse.status)
                         println(timer.stopString())
+                        response.setHeader("Server", "scipr/0.1")
                         Future.value(response)
                     }
                 }
