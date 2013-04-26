@@ -16,3 +16,8 @@ This is just me learning Finagle and playing with some HTTP concepts in Scala.
 - [Finagle project](https://github.com/twitter/finagle)
 - [Finagle quickstart](http://twitter.github.io/finagle/guide/Quickstart.html)
 - [HTTP 1.1 RFC](https://tools.ietf.org/html/rfc2616)
+
+## TODO
+- strip off any arguments file.html?foo=bar
+- the servers know how to parse their own XML or they have their own builder/ parsers
+- do binary or text based on extension

@@ -22,11 +22,11 @@ trait Server {
     def stop()
 }
 
-/** 
+/**
  * This works at a very basic level but much to do.
- * 
- * I think the servers know how to parse their own XML.  
- * Possibly this is an alternate constructor or apply 
+ *
+ * I think the servers know how to parse their own XML.
+ * Possibly this is an alternate constructor or apply
  * method in an object.
  */
 class StaticServer(
@@ -34,6 +34,7 @@ class StaticServer(
     val port: String,
     val path: String,
     val root: String) extends Server {
+
     def start() {
         val service = new Service[HttpRequest, HttpResponse] {
             def apply(req: HttpRequest): Future[HttpResponse] = {
@@ -68,32 +69,44 @@ class StaticServer(
         Await.ready(server)
     }
 
+    val binaryFileExtensions = List("jpg", "jpeg", "png", "gif", "ico")
+    val indexFilename = "/index.html"
+        
+    def isFileBinary(filename: String): Boolean = {
+        binaryFileExtensions.find(filename.toLowerCase.endsWith(_)) match {
+            case Some(theExtension) => true
+            case _ => false
+        }
+    }
+
     def getFileContentsAsChannelBuffer(filename: String): Either[FailureResponse, ChannelBuffer] = {
         import java.io.File
         import java.io.FileInputStream
+        
+        val modifiedFilename = if (filename == "/") indexFilename else filename
 
         try {
-            if (filename.endsWith("png")) {
-                val file = new File(root + filename)
+            if (isFileBinary(modifiedFilename)) {
+                // process as binary file
+                val file = new File(root + modifiedFilename)
                 val in = new FileInputStream(file)
                 val bytes = new Array[Byte](file.length.toInt)
                 in.read(bytes)
                 in.close()
-                
-                println("bytes: " + bytes)
 
-                val cb = ChannelBuffers.copiedBuffer(bytes)
-                Right(cb)
-
+                Right(ChannelBuffers.copiedBuffer(bytes))
             } else {
-                val bufferedSource = scala.io.Source.fromFile(root + filename)
+                // process as text file
+                val bufferedSource = scala.io.Source.fromFile(root + modifiedFilename)
                 val charArray = bufferedSource.toArray
                 val channelBuffer = ChannelBuffers.copiedBuffer(charArray, Charset.forName("UTF-8"))
+
                 Right(channelBuffer)
             }
         } catch {
             case fnfe: FileNotFoundException => {
-                Left(FailureResponse(NotFound, "could not find file: " + filename))
+                fnfe.printStackTrace()
+                Left(FailureResponse(NotFound, "could not find file: " + modifiedFilename))
             }
             case e => {
                 Left(FailureResponse(InternalServerError, e.getMessage()))
